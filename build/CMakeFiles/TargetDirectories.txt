@@ -1,0 +1,3 @@
+/home/xushun/code/chat/build/CMakeFiles/chatserver.dir
+/home/xushun/code/chat/build/CMakeFiles/edit_cache.dir
+/home/xushun/code/chat/build/CMakeFiles/rebuild_cache.dir
