@@ -11,6 +11,7 @@
 #include "UserModel.hh"
 #include "OfflineMessageModel.hh"
 #include "FriendModel.hh"
+#include "GroupModel.hh"
 #include <muduo/net/TcpConnection.h>
 #include <unordered_map>
 #include <functional>
@@ -44,6 +45,12 @@ public:
     void peerChat(const TcpConnectionPtr &conn, json &js, Timestamp time);
     // 添加好友业务
     void addFriend(const TcpConnectionPtr &conn, json &js, Timestamp time);
+    // 创建群组业务
+    void createGroup(const TcpConnectionPtr &conn, json &js, Timestamp time);
+    // 加入群组业务
+    void joinGroup(const TcpConnectionPtr &conn, json &js, Timestamp time);
+    // 群组聊天业务
+    void groupChat(const TcpConnectionPtr &conn, json &js, Timestamp time);
 
 private:
     // 消息类型对应的业务处理方法
@@ -60,6 +67,8 @@ private:
     OfflineMessageModel offlineMessageModel_;
     // friend表数据操作对象
     FriendModel friendModel_;
+    // group和groupuser表数据操作对象
+    GroupModel groupModel_;
 
 private:
     // 在构造中注册消息类型和其对应的回调操作

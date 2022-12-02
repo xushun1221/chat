@@ -20,6 +20,9 @@ ChatService::ChatService()
     msgHandlerMap_[REG_MSG] = std::bind(&ChatService::registr, this, _1, _2, _3);
     msgHandlerMap_[PEER_CHAT_MSG] = std::bind(&ChatService::peerChat, this, _1, _2, _3);
     msgHandlerMap_[ADD_FRIEND_MSG] = std::bind(&ChatService::addFriend, this, _1, _2, _3);
+    msgHandlerMap_[CREATE_GROUP_MSG] = std::bind(&ChatService::createGroup, this, _1, _2, _3);
+    msgHandlerMap_[JOIN_GROUP_MSG] = std::bind(&ChatService::joinGroup, this, _1, _2, _3);
+    msgHandlerMap_[GROUP_CHAT_MSG] = std::bind(&ChatService::groupChat, this, _1, _2, _3);
 }
 
 ChatService *ChatService::instance()
@@ -209,5 +212,55 @@ void ChatService::addFriend(const TcpConnectionPtr &conn, json &js, Timestamp ti
     if (userid != friendid)
     {
         friendModel_.insert(userid, friendid);
+    }
+}
+
+void ChatService::createGroup(const TcpConnectionPtr &conn, json &js, Timestamp time)
+{
+    uint32_t userid = js["userid"].get<uint32_t>();
+    std::string groupname = js["groupname"];
+    std::string groupdesc = js["groupdesc"];
+    // 新的群组
+    Group group(0, groupname, groupdesc);
+    if (groupModel_.createGroup(group))
+    {
+        // 创建新的群组 首先要把创建人添加进群组
+        groupModel_.joinGroup(userid, group.getId(), "creator");
+    }
+    else
+    {
+        // 如果群组名已经存在了 就无法创建
+    }
+}
+
+void ChatService::joinGroup(const TcpConnectionPtr &conn, json &js, Timestamp time)
+{
+    uint32_t userid = js["userid"].get<uint32_t>();
+    uint32_t groupid = js["groupid"].get<uint32_t>();
+    groupModel_.joinGroup(userid, groupid, "normal");
+}
+
+void ChatService::groupChat(const TcpConnectionPtr &conn, json &js, Timestamp time)
+{
+    uint32_t userid = js["userid"].get<uint32_t>();
+    uint32_t groupid = js["groupid"].get<uint32_t>();
+    // 获得该群组中除自己的所有用户id
+    std::vector<uint32_t> vecUsrId = groupModel_.queryGroupUsers(userid, groupid);
+    std::lock_guard<std::mutex> lock(connectionMutex);
+    {
+        for (uint32_t id : vecUsrId)
+        {
+            auto itr = userConnectionMap_.find(id);
+            if (itr != userConnectionMap_.end())
+            {
+                // 如果用户在线 直接发送
+                itr->second->send(js.dump());
+            }
+            else
+            {
+                // 不在线 发送离线消息
+                offlineMessageModel_.insert(id, js.dump());
+            }
+        }
     }
 }
