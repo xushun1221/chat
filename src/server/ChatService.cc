@@ -116,6 +116,9 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
                 response["friend_list"] = frdList;
             }
 
+            // 6. 如果该用户加入过任何群组 推送给他
+            
+
             conn->send(response.dump());
         }
     }

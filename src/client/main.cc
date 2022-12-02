@@ -1,6 +1,6 @@
 /*
  *  @Filename : main.cc
- *  @Description : ChatClient Entry
+ *  @Description : ChatClient
  *  @Datatime : 2022/12/02 17:00:39
  *  @Author : xushun
  */
@@ -376,13 +376,13 @@ void logout(int, std::string);
 // 客户端支持的命令列表
 std::unordered_map<std::string, std::string> commandMap =
     {
-        {"help", "show all command,   fmt> help"},
-        {"peerchat", "peer to peer chat,  fmt> peerchat:{friendid}:{message content}"},
-        {"addfriend", "add a friend by id, fmt> addfriend:{friendid}"},
+        {"help", "       show all command,   fmt> help"},
+        {"peerchat", "   peer to peer chat,  fmt> peerchat:{friendid}:{message content}"},
+        {"addfriend", "  add a friend by id, fmt> addfriend:{friendid}"},
         {"creategroup", "create a group,     fmt> creategroup:{groupname}:{groupdesc}"},
-        {"joingroup", "join a group by id, fmt> joingroup:{groupid}"},
-        {"groupchat", "group chat,         fmt> groupchat:{groupid}:{message content}"},
-        {"logout", "log out,            fmt> logout"}};
+        {"joingroup", "  join a group by id, fmt> joingroup:{groupid}"},
+        {"groupchat", "  group chat,         fmt> groupchat:{groupid}:{message content}"},
+        {"logout", "     log out,            fmt> logout"}};
 
 // 客户端命令处理回调
 std::unordered_map<std::string, std::function<void(int, std::string)>> commandHandlerMap =
@@ -423,7 +423,7 @@ void mainMenu(int clientFd)
             std::cerr << "invalid input command!" << std::endl;
             continue;
         }
-        // 调用命令对应的回调 mainMenu封闭新功能无需修改
+        // 调用命令对应的回调 mainMenu封闭 新功能无需修改
         itr->second(clientFd, buffer.substr(idx + 1, buffer.size() - idx));
     }
 }
