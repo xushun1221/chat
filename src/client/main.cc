@@ -197,7 +197,7 @@ void doLoginResponse(json &responsejs)
     if (0 != responsejs["err_no"].get<int>())
     {
         // 登录失败 服务器会返回失败原因
-        std::cerr << responsejs["err_msg"] << std::endl;
+        std::cerr << responsejs["err_msg"].get<std::string>() << std::endl;
         isLogin = false;
     }
     else
@@ -222,7 +222,7 @@ void doLoginResponse(json &responsejs)
         }
         // 记录当前群组列表
         if (responsejs.contains("group_list"))
-        {
+        {std::cout << responsejs.dump() << std::endl;
             gCurrentUserGroupList.clear();
             std::vector<json> vecGrp = responsejs["group_list"];
             for (json &gjs : vecGrp)
@@ -231,7 +231,6 @@ void doLoginResponse(json &responsejs)
                 group.setId(gjs["groupid"].get<uint32_t>());
                 group.setName(gjs["groupname"]);
                 group.setDesc(gjs["groupdesc"]);
-
                 std::vector<json> vecUsr = gjs["users"];
                 for (json &ujs : vecUsr)
                 {

@@ -117,7 +117,32 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
             }
 
             // 6. 如果该用户加入过任何群组 推送给他
-            
+            std::vector<Group> vecGrp = groupModel_.queryGroupsById(id);
+            if (!vecGrp.empty())
+            {
+                std::vector<json> grpList;
+                for (auto grp : vecGrp)
+                {
+                    json gjs;
+                    gjs["groupid"] = grp.getId();
+                    gjs["groupname"] = grp.getName();
+                    gjs["groupdesc"] = grp.getDesc();
+                    std::vector<GroupUser> vecUsr = grp.getUsers();
+                    std::vector<json> usrList;
+                    for (auto user : vecUsr)
+                    {
+                        json ujs;
+                        ujs["id"] = user.getId();
+                        ujs["name"] = user.getName();
+                        ujs["state"] = user.getState();
+                        ujs["role"] = user.getRole();
+                        usrList.push_back(ujs);
+                    }
+                    gjs["users"] = usrList;
+                    grpList.push_back(gjs);
+                }
+                response["group_list"] = grpList;
+            }
 
             conn->send(response.dump());
         }
