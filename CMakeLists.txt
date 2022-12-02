@@ -21,3 +21,6 @@ add_executable(chatserver ${SERVER_SRC_LIST})
 # 依赖库文件
 target_link_libraries(chatserver muduo_net muduo_base pthread)
 target_link_libraries(chatserver /usr/lib64/mysql/libmysqlclient.so)
+
+add_executable(chatclient ${CLIENT_SRC_LIST})
+target_link_libraries(chatclient pthread)

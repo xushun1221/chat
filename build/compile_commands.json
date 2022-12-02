@@ -38,5 +38,10 @@
   "directory": "/home/xushun/code/chat/build",
   "command": "/opt/rh/devtoolset-8/root/usr/bin/c++  -I/home/xushun/code/chat/include -I/home/xushun/code/chat/include/server -I/home/xushun/code/chat/thirdparty -g -g -o CMakeFiles/chatserver.dir/src/server/main.cc.o -c /home/xushun/code/chat/src/server/main.cc",
   "file": "/home/xushun/code/chat/src/server/main.cc"
+},
+{
+  "directory": "/home/xushun/code/chat/build",
+  "command": "/opt/rh/devtoolset-8/root/usr/bin/c++  -I/home/xushun/code/chat/include -I/home/xushun/code/chat/include/server -I/home/xushun/code/chat/thirdparty -g -g -o CMakeFiles/chatclient.dir/src/client/main.cc.o -c /home/xushun/code/chat/src/client/main.cc",
+  "file": "/home/xushun/code/chat/src/client/main.cc"
 }
 ]

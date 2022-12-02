@@ -64,6 +64,7 @@ CMAKE_BINARY_DIR = /home/xushun/code/chat/build
 
 # The main recursive "all" target.
 all: CMakeFiles/chatserver.dir/all
+all: CMakeFiles/chatclient.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -72,6 +73,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/chatserver.dir/clean
+clean: CMakeFiles/chatclient.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -81,7 +83,7 @@ clean: CMakeFiles/chatserver.dir/clean
 CMakeFiles/chatserver.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xushun/code/chat/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target chatserver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xushun/code/chat/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11 "Built target chatserver"
 .PHONY : CMakeFiles/chatserver.dir/all
 
 # Build rule for subdir invocation for target.
@@ -99,6 +101,32 @@ chatserver: CMakeFiles/chatserver.dir/rule
 CMakeFiles/chatserver.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/clean
 .PHONY : CMakeFiles/chatserver.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/chatclient.dir
+
+# All Build rule for target.
+CMakeFiles/chatclient.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatclient.dir/build.make CMakeFiles/chatclient.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatclient.dir/build.make CMakeFiles/chatclient.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xushun/code/chat/build/CMakeFiles --progress-num=1,2 "Built target chatclient"
+.PHONY : CMakeFiles/chatclient.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/chatclient.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xushun/code/chat/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/chatclient.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xushun/code/chat/build/CMakeFiles 0
+.PHONY : CMakeFiles/chatclient.dir/rule
+
+# Convenience name for target.
+chatclient: CMakeFiles/chatclient.dir/rule
+.PHONY : chatclient
+
+# clean rule for target.
+CMakeFiles/chatclient.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatclient.dir/build.make CMakeFiles/chatclient.dir/clean
+.PHONY : CMakeFiles/chatclient.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

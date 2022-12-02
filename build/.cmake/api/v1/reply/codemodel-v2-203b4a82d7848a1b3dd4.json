@@ -15,7 +15,8 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -30,12 +31,20 @@
 					"name" : "chat",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
 			"targets" : 
 			[
+				{
+					"directoryIndex" : 0,
+					"id" : "chatclient::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-chatclient-Debug-aa7f3c25580885e97e93.json",
+					"name" : "chatclient",
+					"projectIndex" : 0
+				},
 				{
 					"directoryIndex" : 0,
 					"id" : "chatserver::@6890427a1f51a3e7e1df",

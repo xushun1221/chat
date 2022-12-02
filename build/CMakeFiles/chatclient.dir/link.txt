@@ -1,0 +1,1 @@
+/opt/rh/devtoolset-8/root/usr/bin/c++ -g -g -rdynamic CMakeFiles/chatclient.dir/src/client/main.cc.o -o /home/xushun/code/chat/bin/chatclient  -lpthread 
