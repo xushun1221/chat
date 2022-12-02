@@ -105,7 +105,6 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
             if (!vecFrd.empty())
             {
                 std::vector<json> frdList;
-                frdList.reserve(vecFrd.size());
                 for (auto frd : vecFrd)
                 {
                     json fjs;
