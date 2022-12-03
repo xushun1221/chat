@@ -17,6 +17,7 @@ using namespace muduo;
 ChatService::ChatService()
 {
     msgHandlerMap_[LOGIN_MSG] = std::bind(&ChatService::login, this, _1, _2, _3);
+    msgHandlerMap_[LOGOUT_MSG] = std::bind(&ChatService::logout, this, _1, _2, _3);
     msgHandlerMap_[REG_MSG] = std::bind(&ChatService::registr, this, _1, _2, _3);
     msgHandlerMap_[PEER_CHAT_MSG] = std::bind(&ChatService::peerChat, this, _1, _2, _3);
     msgHandlerMap_[ADD_FRIEND_MSG] = std::bind(&ChatService::addFriend, this, _1, _2, _3);
@@ -156,6 +157,21 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
         response["err_msg"] = "wrong id or password";
         conn->send(response.dump());
     }
+}
+
+void ChatService::logout(const TcpConnectionPtr &conn, json &js, Timestamp time)
+{
+    uint32_t id = js["id"].get<uint32_t>();
+    {
+        std::lock_guard<std::mutex> lock(connectionMutex);
+        auto itr = userConnectionMap_.find(id);
+        if (itr != userConnectionMap_.end())
+        {
+            userConnectionMap_.erase(itr);
+        }
+    }
+    User user(id, "", "", "offline");
+    userModel_.updateState(user);
 }
 
 void ChatService::registr(const TcpConnectionPtr &conn, json &js, Timestamp time)

@@ -222,7 +222,7 @@ void doLoginResponse(json &responsejs)
         }
         // 记录当前群组列表
         if (responsejs.contains("group_list"))
-        {std::cout << responsejs.dump() << std::endl;
+        {
             gCurrentUserGroupList.clear();
             std::vector<json> vecGrp = responsejs["group_list"];
             for (json &gjs : vecGrp)
@@ -289,14 +289,16 @@ void readHandler(int clientFd)
         int msgType = js["msg_type"].get<int>();
         if (PEER_CHAT_MSG == msgType)
         {
-            std::cout << js["time"].get<std::string>() << " [" << js["id"] << "]"
+            std::cout << std::endl
+                      << js["time"].get<std::string>() << " [" << js["id"] << "]"
                       << js["name"].get<std::string>() << " said: "
                       << js["msg_content"].get<std::string>() << std::endl;
             continue;
         }
         if (GROUP_CHAT_MSG == msgType)
         {
-            std::cout << js["time"].get<std::string>() << " [G" << js["groupid"] << "]"
+            std::cout << std::endl
+                      << js["time"].get<std::string>() << " [G" << js["groupid"] << "]"
                       << "[" << js["userid"] << js["username"].get<std::string>()
                       << " said: " << js["msg_content"].get<std::string>() << std::endl;
             continue;
@@ -397,8 +399,9 @@ std::unordered_map<std::string, std::function<void(int, std::string)>> commandHa
 void mainMenu(int clientFd)
 {
     // 显示help菜单
-    help();
-    
+    // help();
+    std::cout << "use \"help\" to get command list" << std::endl;
+
     std::string buffer;
     while (isMainMenuRunning)
     {
@@ -430,7 +433,7 @@ void mainMenu(int clientFd)
 void help(int, std::string)
 {
     std::cout << "command list >>>" << std::endl;
-    for (auto& itr : commandMap)
+    for (auto &itr : commandMap)
     {
         std::cout << itr.first << " : " << itr.second << std::endl;
     }

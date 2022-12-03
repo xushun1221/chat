@@ -39,6 +39,8 @@ public:
     void clientCloseException(const TcpConnectionPtr &conn);
     // 登录业务
     void login(const TcpConnectionPtr &conn, json &js, Timestamp time);
+    // 登出业务
+    void logout(const TcpConnectionPtr &conn, json &js, Timestamp time);
     // 注册业务
     void registr(const TcpConnectionPtr &conn, json &js, Timestamp time);
     // 一对一聊天业务
