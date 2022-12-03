@@ -264,7 +264,7 @@ void doLoginResponse(json &responsejs)
                 {
                     // 群组消息 time [Ggroupid][userid]username said: xxxx
                     std::cout << js["time"].get<std::string>() << " [G" << js["groupid"] << "]"
-                              << "[" << js["userid"] << js["username"].get<std::string>()
+                              << "[" << js["userid"] << "]" << js["username"].get<std::string>()
                               << " said: " << js["msg_content"].get<std::string>() << std::endl;
                 }
             }
@@ -299,7 +299,7 @@ void readHandler(int clientFd)
         {
             std::cout << std::endl
                       << js["time"].get<std::string>() << " [G" << js["groupid"] << "]"
-                      << "[" << js["userid"] << js["username"].get<std::string>()
+                      << "[" << js["userid"] << "]" << js["username"].get<std::string>()
                       << " said: " << js["msg_content"].get<std::string>() << std::endl;
             continue;
         }
