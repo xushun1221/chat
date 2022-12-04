@@ -6,7 +6,7 @@
  */
 
 #include "FriendModel.hh"
-#include "db.hh"
+#include "MySQL.hh"
 
 bool FriendModel::insert(uint32_t userid, uint32_t friendid)
 {

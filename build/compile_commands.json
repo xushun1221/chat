@@ -21,18 +21,23 @@
 },
 {
   "directory": "/home/xushun/code/chat/build",
+  "command": "/opt/rh/devtoolset-8/root/usr/bin/c++  -I/home/xushun/code/chat/include -I/home/xushun/code/chat/include/server -I/home/xushun/code/chat/thirdparty -g -g -o CMakeFiles/chatserver.dir/src/server/MySQL.cc.o -c /home/xushun/code/chat/src/server/MySQL.cc",
+  "file": "/home/xushun/code/chat/src/server/MySQL.cc"
+},
+{
+  "directory": "/home/xushun/code/chat/build",
   "command": "/opt/rh/devtoolset-8/root/usr/bin/c++  -I/home/xushun/code/chat/include -I/home/xushun/code/chat/include/server -I/home/xushun/code/chat/thirdparty -g -g -o CMakeFiles/chatserver.dir/src/server/OfflineMessageModel.cc.o -c /home/xushun/code/chat/src/server/OfflineMessageModel.cc",
   "file": "/home/xushun/code/chat/src/server/OfflineMessageModel.cc"
 },
 {
   "directory": "/home/xushun/code/chat/build",
-  "command": "/opt/rh/devtoolset-8/root/usr/bin/c++  -I/home/xushun/code/chat/include -I/home/xushun/code/chat/include/server -I/home/xushun/code/chat/thirdparty -g -g -o CMakeFiles/chatserver.dir/src/server/UserModel.cc.o -c /home/xushun/code/chat/src/server/UserModel.cc",
-  "file": "/home/xushun/code/chat/src/server/UserModel.cc"
+  "command": "/opt/rh/devtoolset-8/root/usr/bin/c++  -I/home/xushun/code/chat/include -I/home/xushun/code/chat/include/server -I/home/xushun/code/chat/thirdparty -g -g -o CMakeFiles/chatserver.dir/src/server/Redis.cc.o -c /home/xushun/code/chat/src/server/Redis.cc",
+  "file": "/home/xushun/code/chat/src/server/Redis.cc"
 },
 {
   "directory": "/home/xushun/code/chat/build",
-  "command": "/opt/rh/devtoolset-8/root/usr/bin/c++  -I/home/xushun/code/chat/include -I/home/xushun/code/chat/include/server -I/home/xushun/code/chat/thirdparty -g -g -o CMakeFiles/chatserver.dir/src/server/db.cc.o -c /home/xushun/code/chat/src/server/db.cc",
-  "file": "/home/xushun/code/chat/src/server/db.cc"
+  "command": "/opt/rh/devtoolset-8/root/usr/bin/c++  -I/home/xushun/code/chat/include -I/home/xushun/code/chat/include/server -I/home/xushun/code/chat/thirdparty -g -g -o CMakeFiles/chatserver.dir/src/server/UserModel.cc.o -c /home/xushun/code/chat/src/server/UserModel.cc",
+  "file": "/home/xushun/code/chat/src/server/UserModel.cc"
 },
 {
   "directory": "/home/xushun/code/chat/build",

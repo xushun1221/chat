@@ -264,6 +264,14 @@ CMakeFiles/chatserver.dir/src/server/ChatServer.cc.o: \
  /usr/include/muduo/base/Mutex.h /usr/include/muduo/base/CurrentThread.h \
  /usr/include/muduo/net/TimerId.h \
  /home/xushun/code/chat/include/server/ChatService.hh \
+ /home/xushun/code/chat/include/server/Redis.hh \
+ /usr/local/include/hiredis/hiredis.h /usr/local/include/hiredis/read.h \
+ /usr/include/sys/time.h /usr/local/include/hiredis/sds.h \
+ /usr/local/include/hiredis/alloc.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/thread \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/chrono \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/ratio \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/parse_numbers.h \
  /home/xushun/code/chat/include/server/UserModel.hh \
  /home/xushun/code/chat/include/server/User.hh \
  /home/xushun/code/chat/include/server/OfflineMessageModel.hh \
@@ -272,7 +280,4 @@ CMakeFiles/chatserver.dir/src/server/ChatServer.cc.o: \
  /home/xushun/code/chat/include/server/Group.hh \
  /home/xushun/code/chat/include/server/GroupUser.hh \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/mutex \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/chrono \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/ratio \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/parse_numbers.h \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/std_mutex.h

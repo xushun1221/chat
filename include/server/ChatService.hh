@@ -8,6 +8,7 @@
 #define __CHATSERVICE_HH_
 
 #include "json.hpp"
+#include "Redis.hh"
 #include "UserModel.hh"
 #include "OfflineMessageModel.hh"
 #include "FriendModel.hh"
@@ -34,6 +35,8 @@ public:
     MsgHandler getHandler(int msgType);
     // 服务器进程异常中止 业务重置方法
     void reset();
+    // 处理Redis上报的消息 转发到目标客户端上
+    void handleRedisSubscribeMessage(uint32_t id, std::string message);
 
     // 客户端异常退出处理
     void clientCloseException(const TcpConnectionPtr &conn);
@@ -61,7 +64,7 @@ private:
     // 在线用户的通信连接
     std::unordered_map<uint32_t, TcpConnectionPtr> userConnectionMap_;
     // 保证userConnectionMap线程安全
-    std::mutex connectionMutex;
+    std::mutex connectionMutex_;
 
     // user表数据操作对象
     UserModel userModel_;
@@ -71,6 +74,9 @@ private:
     FriendModel friendModel_;
     // group和groupuser表数据操作对象
     GroupModel groupModel_;
+
+    // Redis操作对象
+    Redis redis_;
 
 private:
     // 在构造中注册消息类型和其对应的回调操作

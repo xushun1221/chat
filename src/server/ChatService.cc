@@ -24,6 +24,13 @@ ChatService::ChatService()
     msgHandlerMap_[CREATE_GROUP_MSG] = std::bind(&ChatService::createGroup, this, _1, _2, _3);
     msgHandlerMap_[JOIN_GROUP_MSG] = std::bind(&ChatService::joinGroup, this, _1, _2, _3);
     msgHandlerMap_[GROUP_CHAT_MSG] = std::bind(&ChatService::groupChat, this, _1, _2, _3);
+
+    // 连接Redis服务器
+    if (redis_.connect())
+    {
+        // 设置上报消息的回调
+        redis_.initNotifyHandler(std::bind(&ChatService::handleRedisSubscribeMessage, this, _1, _2));
+    }
 }
 
 ChatService *ChatService::instance()
@@ -53,6 +60,22 @@ void ChatService::reset()
     userModel_.resetStateAll();
 }
 
+void ChatService::handleRedisSubscribeMessage(uint32_t id, std::string message)
+{
+    // Redis上报的消息 说明该服务器内肯定有id的连接 直接转发
+    {
+        std::lock_guard<std::mutex> lock(connectionMutex_);
+        auto itr = userConnectionMap_.find(id);
+        if (itr != userConnectionMap_.end())
+        {
+            itr->second->send(message);
+            return;
+        }
+    }
+    // 目标客户端有可能在Redis上报过程中下线
+    offlineMessageModel_.insert(id, message);
+}
+
 void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
 {
     uint32_t id = js["id"].get<uint32_t>();
@@ -75,9 +98,12 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
         {
             // 该用户未登录 登录成功
 
+            // 0. 向Redis订阅该用户的消息
+            redis_.subscribe(id);
+
             // 1. 登录成功需要记录该用户的连接信息
             {
-                std::lock_guard<std::mutex> lock(connectionMutex);
+                std::lock_guard<std::mutex> lock(connectionMutex_);
                 userConnectionMap_.insert({id, conn});
             }
 
@@ -163,13 +189,15 @@ void ChatService::logout(const TcpConnectionPtr &conn, json &js, Timestamp time)
 {
     uint32_t id = js["id"].get<uint32_t>();
     {
-        std::lock_guard<std::mutex> lock(connectionMutex);
+        std::lock_guard<std::mutex> lock(connectionMutex_);
         auto itr = userConnectionMap_.find(id);
         if (itr != userConnectionMap_.end())
         {
             userConnectionMap_.erase(itr);
         }
     }
+    // 用户下线 取消Redis订阅
+    redis_.unsubscribe(id);
     User user(id, "", "", "offline");
     userModel_.updateState(user);
 }
@@ -207,7 +235,7 @@ void ChatService::clientCloseException(const TcpConnectionPtr &conn)
     // 某个连接异常下线 找到该用户id删除连接信息 并更改在线状态
     User user;
     {
-        std::lock_guard<std::mutex> lock(connectionMutex);
+        std::lock_guard<std::mutex> lock(connectionMutex_);
         for (auto itr = userConnectionMap_.begin(); itr != userConnectionMap_.end(); ++itr)
         {
             if (itr->second == conn)
@@ -221,6 +249,8 @@ void ChatService::clientCloseException(const TcpConnectionPtr &conn)
     }
     if (user.getId() != 0)
     {
+        // 用户下线 取消Redis订阅
+        redis_.unsubscribe(user.getId());
         // 找到了连接对应的id 更改在线状态
         user.setState("offline");
         userModel_.updateState(user);
@@ -230,10 +260,10 @@ void ChatService::clientCloseException(const TcpConnectionPtr &conn)
 void ChatService::peerChat(const TcpConnectionPtr &conn, json &js, Timestamp time)
 {
     uint32_t peerid = js["to"].get<uint32_t>();
-    // 目标用户是否在线
+    // 目标用户是否在线 (同一台服务器)
     std::unordered_map<uint32_t, TcpConnectionPtr>::iterator itr;
     {
-        std::lock_guard<std::mutex> lock(connectionMutex);
+        std::lock_guard<std::mutex> lock(connectionMutex_);
         itr = userConnectionMap_.find(peerid);
         // 在线消息转发应该在临界区内操作 因为出临界区后连接可能被释放
         if (itr != userConnectionMap_.end())
@@ -242,6 +272,14 @@ void ChatService::peerChat(const TcpConnectionPtr &conn, json &js, Timestamp tim
             itr->second->send(js.dump());
             return;
         }
+    }
+    // 在线 (在其他服务器上)
+    User user = userModel_.queryById(peerid);
+    if (user.getState() == "online")
+    {
+        // 发布到redis消息队列中
+        redis_.publish(peerid, js.dump());
+        return;
     }
     // 离线 存储离线消息
     offlineMessageModel_.insert(peerid, js.dump());
@@ -289,20 +327,30 @@ void ChatService::groupChat(const TcpConnectionPtr &conn, json &js, Timestamp ti
     uint32_t groupid = js["groupid"].get<uint32_t>();
     // 获得该群组中除自己的所有用户id
     std::vector<uint32_t> vecUsrId = groupModel_.queryGroupUsers(userid, groupid);
-    std::lock_guard<std::mutex> lock(connectionMutex);
+    std::lock_guard<std::mutex> lock(connectionMutex_);
     {
         for (uint32_t id : vecUsrId)
         {
             auto itr = userConnectionMap_.find(id);
             if (itr != userConnectionMap_.end())
             {
-                // 如果用户在线 直接发送
+                // 如果用户在线(同一台服务器上) 直接发送
                 itr->second->send(js.dump());
             }
             else
             {
-                // 不在线 发送离线消息
-                offlineMessageModel_.insert(id, js.dump());
+                User user = userModel_.queryById(id);
+                if (user.getState() == "online")
+                {
+                    // 在线(其他服务器上)
+                    // 发布到redis消息队列中
+                    redis_.publish(id, js.dump());
+                }
+                else
+                {
+                    // 不在线 发送离线消息
+                    offlineMessageModel_.insert(id, js.dump());
+                }
             }
         }
     }

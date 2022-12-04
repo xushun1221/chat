@@ -6,7 +6,7 @@
  */
 
 #include "OfflineMessageModel.hh"
-#include "db.hh"
+#include "MySQL.hh"
 
 bool OfflineMessageModel::insert(uint32_t userid, std::string msg)
 {

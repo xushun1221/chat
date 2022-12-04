@@ -83,12 +83,12 @@ clean: CMakeFiles/chatclient.dir/clean
 CMakeFiles/chatserver.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xushun/code/chat/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11 "Built target chatserver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xushun/code/chat/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12 "Built target chatserver"
 .PHONY : CMakeFiles/chatserver.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chatserver.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xushun/code/chat/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xushun/code/chat/build/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/chatserver.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xushun/code/chat/build/CMakeFiles 0
 .PHONY : CMakeFiles/chatserver.dir/rule

@@ -262,6 +262,30 @@ src/server/GroupModel.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/GroupModel.cc.s
 .PHONY : src/server/GroupModel.cc.s
 
+src/server/MySQL.o: src/server/MySQL.cc.o
+.PHONY : src/server/MySQL.o
+
+# target to build an object file
+src/server/MySQL.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/MySQL.cc.o
+.PHONY : src/server/MySQL.cc.o
+
+src/server/MySQL.i: src/server/MySQL.cc.i
+.PHONY : src/server/MySQL.i
+
+# target to preprocess a source file
+src/server/MySQL.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/MySQL.cc.i
+.PHONY : src/server/MySQL.cc.i
+
+src/server/MySQL.s: src/server/MySQL.cc.s
+.PHONY : src/server/MySQL.s
+
+# target to generate assembly for a file
+src/server/MySQL.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/MySQL.cc.s
+.PHONY : src/server/MySQL.cc.s
+
 src/server/OfflineMessageModel.o: src/server/OfflineMessageModel.cc.o
 .PHONY : src/server/OfflineMessageModel.o
 
@@ -286,6 +310,30 @@ src/server/OfflineMessageModel.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/OfflineMessageModel.cc.s
 .PHONY : src/server/OfflineMessageModel.cc.s
 
+src/server/Redis.o: src/server/Redis.cc.o
+.PHONY : src/server/Redis.o
+
+# target to build an object file
+src/server/Redis.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/Redis.cc.o
+.PHONY : src/server/Redis.cc.o
+
+src/server/Redis.i: src/server/Redis.cc.i
+.PHONY : src/server/Redis.i
+
+# target to preprocess a source file
+src/server/Redis.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/Redis.cc.i
+.PHONY : src/server/Redis.cc.i
+
+src/server/Redis.s: src/server/Redis.cc.s
+.PHONY : src/server/Redis.s
+
+# target to generate assembly for a file
+src/server/Redis.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/Redis.cc.s
+.PHONY : src/server/Redis.cc.s
+
 src/server/UserModel.o: src/server/UserModel.cc.o
 .PHONY : src/server/UserModel.o
 
@@ -309,30 +357,6 @@ src/server/UserModel.s: src/server/UserModel.cc.s
 src/server/UserModel.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/UserModel.cc.s
 .PHONY : src/server/UserModel.cc.s
-
-src/server/db.o: src/server/db.cc.o
-.PHONY : src/server/db.o
-
-# target to build an object file
-src/server/db.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/db.cc.o
-.PHONY : src/server/db.cc.o
-
-src/server/db.i: src/server/db.cc.i
-.PHONY : src/server/db.i
-
-# target to preprocess a source file
-src/server/db.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/db.cc.i
-.PHONY : src/server/db.cc.i
-
-src/server/db.s: src/server/db.cc.s
-.PHONY : src/server/db.s
-
-# target to generate assembly for a file
-src/server/db.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chatserver.dir/build.make CMakeFiles/chatserver.dir/src/server/db.cc.s
-.PHONY : src/server/db.cc.s
 
 src/server/main.o: src/server/main.cc.o
 .PHONY : src/server/main.o
@@ -383,15 +407,18 @@ help:
 	@echo "... src/server/GroupModel.o"
 	@echo "... src/server/GroupModel.i"
 	@echo "... src/server/GroupModel.s"
+	@echo "... src/server/MySQL.o"
+	@echo "... src/server/MySQL.i"
+	@echo "... src/server/MySQL.s"
 	@echo "... src/server/OfflineMessageModel.o"
 	@echo "... src/server/OfflineMessageModel.i"
 	@echo "... src/server/OfflineMessageModel.s"
+	@echo "... src/server/Redis.o"
+	@echo "... src/server/Redis.i"
+	@echo "... src/server/Redis.s"
 	@echo "... src/server/UserModel.o"
 	@echo "... src/server/UserModel.i"
 	@echo "... src/server/UserModel.s"
-	@echo "... src/server/db.o"
-	@echo "... src/server/db.i"
-	@echo "... src/server/db.s"
 	@echo "... src/server/main.o"
 	@echo "... src/server/main.i"
 	@echo "... src/server/main.s"

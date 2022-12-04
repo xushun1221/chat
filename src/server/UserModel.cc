@@ -5,7 +5,7 @@
  *  @Author : xushun
  */
 #include "UserModel.hh"
-#include "db.hh"
+#include "MySQL.hh"
 #include <iostream>
 
 bool UserModel::insert(User &user)

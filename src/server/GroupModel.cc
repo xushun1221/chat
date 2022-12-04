@@ -6,7 +6,7 @@
  */
 
 #include "GroupModel.hh"
-#include "db.hh"
+#include "MySQL.hh"
 
 bool GroupModel::createGroup(Group &group)
 {

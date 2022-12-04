@@ -197,6 +197,14 @@ CMakeFiles/chatserver.dir/src/server/ChatService.cc.o: \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/quoted_string.h \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/sstream \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/sstream.tcc \
+ /home/xushun/code/chat/include/server/Redis.hh \
+ /usr/local/include/hiredis/hiredis.h /usr/local/include/hiredis/read.h \
+ /usr/include/sys/time.h /usr/local/include/hiredis/sds.h \
+ /usr/local/include/hiredis/alloc.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/thread \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/chrono \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/ratio \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/parse_numbers.h \
  /home/xushun/code/chat/include/server/UserModel.hh \
  /home/xushun/code/chat/include/server/User.hh \
  /home/xushun/code/chat/include/server/OfflineMessageModel.hh \
@@ -268,9 +276,6 @@ CMakeFiles/chatserver.dir/src/server/ChatService.cc.o: \
  /usr/local/include/boost/core/enable_if.hpp \
  /usr/local/include/boost/type_traits/is_same.hpp \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/mutex \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/chrono \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/ratio \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/parse_numbers.h \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/std_mutex.h \
  /home/xushun/code/chat/include/public.hh \
  /usr/include/muduo/base/Logging.h /usr/include/muduo/base/LogStream.h
